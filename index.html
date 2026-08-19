@@ -15,77 +15,523 @@
       font-family: Arial, sans-serif;
       background: #f5f7fa;
       color: #222;
-      text-align: center;
     }
 
-    .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 30px 20px;
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: 35px 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 520px;
+      background: white;
+      padding: 30px 22px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
     h1 {
-      margin-top: 50px;
-      font-size: 36px;
+      font-size: 34px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 27px;
+      margin-bottom: 18px;
     }
 
     p {
       font-size: 18px;
-      line-height: 1.8;
+      line-height: 1.9;
+    }
+
+    .small {
+      font-size: 15px;
+      color: #666;
     }
 
     button {
-      margin-top: 25px;
-      padding: 14px 30px;
-      border: none;
-      border-radius: 10px;
-      font-size: 18px;
-      cursor: pointer;
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin: 12px 0;
+      border: 0;
+      border-radius: 12px;
       background: #222;
       color: white;
+      font-size: 18px;
+      cursor: pointer;
     }
 
-    button:hover {
-      opacity: 0.9;
+    button:active {
+      transform: scale(0.98);
     }
 
-    #app {
-      display: none;
-      padding: 40px 20px;
+    .option {
+      background: #f0f2f5;
+      color: #222;
+      border: 1px solid #ddd;
+    }
+
+    .success {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .timer {
+      font-size: 55px;
+      font-weight: bold;
+      margin: 25px 0;
+      direction: ltr;
+    }
+
+    .points {
+      font-size: 24px;
+      margin: 15px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 20px;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .verse {
+      font-size: 20px;
+      line-height: 2;
+      margin: 20px 0;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container" id="welcome">
-    <h1>لحظة من عمرك</h1>
+  <!-- الشاشة 1 -->
+  <section class="screen active" id="screen1">
+    <div class="box">
+      <h1>🌱 لحظة من عمرك</h1>
 
-    <p>
-      مرحبًا بك في تطبيق لحظة من عمرك
-    </p>
+      <p>
+        لن نأخذ من وقتك إلا لحظة.
+      </p>
 
-    <p>
-      احتفظ بلحظاتك وذكرياتك في مكان واحد.
-    </p>
+      <p>
+        نريد أن نساعدك على استعادة وقتك،
+        وليس أن نأخذ المزيد منه.
+      </p>
 
-    <button onclick="startApp()">
-      ابدأ الآن
-    </button>
-  </div>
+      <button onclick="goTo(2)">ابدأ</button>
+    </div>
+  </section>
 
-  <div id="app">
-    <h1>أهلًا بك في لحظة من عمرك ❤️</h1>
 
-    <p>
-      اختر ما تريد القيام به.
-    </p>
-  </div>
+  <!-- الشاشة 2 -->
+  <section class="screen" id="screen2">
+    <div class="box">
+      <h1>🌱 لحظة من عمرك</h1>
+
+      <p>ما الذي تفعله في أغلب يومك؟</p>
+
+      <p>اختر واحدًا فقط:</p>
+
+      <button class="option" onclick="chooseActivity('أعمل')">
+        🧑‍💼 أعمل
+      </button>
+
+      <button class="option" onclick="chooseActivity('أدرس')">
+        📚 أدرس
+      </button>
+
+      <button class="option" onclick="chooseActivity('أعمل وأدرس')">
+        🧑‍💼📚 أعمل وأدرس
+      </button>
+
+      <button class="option" onclick="chooseActivity('غير ذلك')">
+        🏠 غير ذلك
+      </button>
+    </div>
+  </section>
+
+
+  <!-- الشاشة 3 -->
+  <section class="screen" id="screen3">
+    <div class="box">
+      <h2 id="activityTitle">ممتاز 📚</h2>
+
+      <p>
+        متى تنتهي دراستك عادةً؟
+      </p>
+
+      <p>
+        اختر وقت انتهاء دراستك، حتى يعرف التطبيق
+        متى يبدأ حساب وقت الفراغ الشخصي.
+      </p>
+
+      <p class="small">
+        مثال: 14:00 أو 16:30 أو 18:00
+      </p>
+
+      <input type="time" id="endTime">
+
+      <button onclick="saveEndTime()">التالي</button>
+    </div>
+  </section>
+
+
+  <!-- الشاشة 4 -->
+  <section class="screen" id="screen4">
+    <div class="box">
+      <h2>تمام 📚</h2>
+
+      <p>
+        سجّلنا:
+      </p>
+
+      <p id="summaryTime"></p>
+
+      <p>
+        الآن نحتاج معلومة واحدة فقط:
+      </p>
+
+      <p>
+        ⏳ متى تريد أن يبدأ التطبيق بتنبيهك؟
+      </p>
+
+      <p>
+        اختر الحد الذي تريد تجربته اليوم.
+      </p>
+
+      <button class="option" onclick="chooseLimit(3)">
+        3 ساعات
+      </button>
+
+      <button class="option" onclick="chooseLimit(4)">
+        4 ساعات
+      </button>
+
+      <button class="option" onclick="chooseLimit(5)">
+        5 ساعات
+      </button>
+
+      <button class="option" onclick="chooseCustom()">
+        مخصص
+      </button>
+
+      <div id="customArea"></div>
+    </div>
+  </section>
+
+
+  <!-- الشاشة 5 -->
+  <section class="screen" id="screen5">
+    <div class="box">
+      <h2>✅ إعدادك الآن</h2>
+
+      <p id="finalSettings"></p>
+
+      <p>
+        في تجربة اليوم يبدأ الحساب من وقت انتهاء
+        العمل أو الدراسة.
+      </p>
+
+      <button onclick="goTo(6)">متابعة</button>
+    </div>
+  </section>
+
+
+  <!-- الشاشة 6 -->
+  <section class="screen" id="screen6">
+    <div class="box">
+      <h1>⏳ هذه لحظة من عمرك</h1>
+
+      <p id="alertMessage"></p>
+
+      <p>
+        ماذا تختار الآن؟
+      </p>
+
+      <button onclick="choosePath('آخرتي')">
+        🤲 لآخرتي
+      </button>
+
+      <button onclick="choosePath('دنياي')">
+        🌍 لدنياي
+      </button>
+
+      <button onclick="continuePhone()">
+        📱 سأكمل
+      </button>
+    </div>
+  </section>
+
+
+  <!-- الشاشة 7 -->
+  <section class="screen" id="screen7">
+    <div class="box">
+      <h2>🌙 دقيقة لآخرتك</h2>
+
+      <div class="verse">
+        ﴿وَالْعَصْرِ ۝ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ ۝
+        إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ
+        وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ﴾
+      </div>
+
+      <p>سورة العصر</p>
+
+      <p>
+        فكرة اليوم:
+        عمرك ليس فقط الساعات التي تعيشها،
+        بل ما تضعه في هذه الساعات من عمل نافع.
+      </p>
+
+      <p>
+        🎯 هل تريد أن تستعيد 30 دقيقة من عمرك الآن؟
+      </p>
+
+      <button onclick="startChallenge()">
+        🤲 نعم، أبدأ التحدي
+      </button>
+
+      <button class="option" onclick="goTo(6)">
+        لاحقًا
+      </button>
+    </div>
+  </section>
+
+
+  <!-- الشاشة 8 -->
+  <section class="screen" id="screen8">
+    <div class="box">
+      <h2>بدأ التحدي</h2>
+
+      <p>
+        30:00 دقيقة بدون هاتف
+      </p>
+
+      <p>
+        ضع الهاتف جانبًا الآن. 🌱
+      </p>
+
+      <p>
+        الهدف: استعادة 30 دقيقة من عمرك.
+      </p>
+
+      <div class="points">
+        النقاط عند النجاح: ⭐ +30
+      </div>
+
+      <p>
+        لا تحتاج أن تفعل شيئًا آخر.
+        <br>
+        فقط اترك الهاتف جانبًا حتى ينتهي الوقت.
+      </p>
+
+      <div class="timer" id="timer">
+        30:00
+      </div>
+
+      <p class="small">
+        إذا اضطررت لاستخدام الهاتف لشيء ضروري،
+        يمكنك إنهاء التحدي دون عقوبة.
+      </p>
+
+      <button class="option" onclick="finishEarly()">
+        إنهاء التحدي الآن
+      </button>
+    </div>
+  </section>
+
+
+  <!-- الشاشة 9 -->
+  <section class="screen" id="screen9">
+    <div class="box">
+      <div class="success">🏆 أحسنت!</div>
+
+      <h2>لقد استعدت 30 دقيقة من عمرك.</h2>
+
+      <div class="points">
+        ⭐ +30 نقطة
+      </div>
+
+      <p>
+        لحظتك لم تذهب سدى.
+      </p>
+
+      <button onclick="restartDay()">العودة للبداية</button>
+    </div>
+  </section>
+
 
   <script>
-    function startApp() {
-      document.getElementById("welcome").style.display = "none";
-      document.getElementById("app").style.display = "block";
+    let activity = "";
+    let endTime = "";
+    let limitHours = 5;
+    let timerInterval = null;
+    let remainingSeconds = 1800;
+
+    function goTo(number) {
+      document.querySelectorAll(".screen").forEach(function(screen) {
+        screen.classList.remove("active");
+      });
+
+      document.getElementById("screen" + number).classList.add("active");
+
+      window.scrollTo(0, 0);
+    }
+
+    function chooseActivity(value) {
+      activity = value;
+
+      if (value === "أدرس") {
+        document.getElementById("activityTitle").textContent = "ممتاز 📚";
+      } else if (value === "أعمل") {
+        document.getElementById("activityTitle").textContent = "ممتاز 🧑‍💼";
+      } else if (value === "أعمل وأدرس") {
+        document.getElementById("activityTitle").textContent = "ممتاز 🧑‍💼📚";
+      } else {
+        document.getElementById("activityTitle").textContent = "تمام 🏠";
+      }
+
+      goTo(3);
+    }
+
+    function saveEndTime() {
+      const input = document.getElementById("endTime");
+
+      if (!input.value) {
+        alert("اختر وقت الانتهاء أولًا.");
+        return;
+      }
+
+      endTime = input.value;
+
+      document.getElementById("summaryTime").textContent =
+        activity + " — ينتهي الوقت: " + endTime;
+
+      goTo(4);
+    }
+
+    function chooseLimit(hours) {
+      limitHours = hours;
+
+      document.getElementById("customArea").innerHTML = "";
+
+      document.getElementById("finalSettings").innerHTML =
+        "📌 " + activity +
+        "<br>🕑 وقت الانتهاء: " + endTime +
+        "<br>⏳ لحظة التنبيه: بعد " + hours + " ساعات من وقتك الشخصي";
+
+      document.getElementById("alertMessage").textContent =
+        "لقد مرّت " + hours + " ساعات من وقتك الشخصي.";
+
+      goTo(5);
+    }
+
+    function chooseCustom() {
+      document.getElementById("customArea").innerHTML = `
+        <input type="number" id="customHours"
+               min="1" max="12"
+               placeholder="عدد الساعات">
+
+        <button onclick="saveCustomLimit()">
+          تأكيد
+        </button>
+      `;
+    }
+
+    function saveCustomLimit() {
+      const value = Number(document.getElementById("customHours").value);
+
+      if (!value || value < 1 || value > 12) {
+        alert("أدخل عدد ساعات بين 1 و12.");
+        return;
+      }
+
+      chooseLimit(value);
+    }
+
+    function choosePath(path) {
+      if (path === "آخرتي") {
+        goTo(7);
+      } else {
+        document.getElementById("alertMessage").textContent =
+          "اخترتَ لدنياي. خذ لحظتك بوعي، ثم عد عندما تكون مستعدًا.";
+      }
+    }
+
+    function continuePhone() {
+      document.getElementById("alertMessage").textContent =
+        "اخترتَ أن تكمل. تذكّر أن هذه اللحظة من عمرك.";
+    }
+
+    function startChallenge() {
+      remainingSeconds = 1800;
+      updateTimer();
+      goTo(8);
+
+      clearInterval(timerInterval);
+
+      timerInterval = setInterval(function() {
+        remainingSeconds--;
+        updateTimer();
+
+        if (remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          completeChallenge();
+        }
+      }, 1000);
+    }
+
+    function updateTimer() {
+      const minutes = Math.floor(remainingSeconds / 60);
+      const seconds = remainingSeconds % 60;
+
+      document.getElementById("timer").textContent =
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+    }
+
+    function completeChallenge() {
+      document.getElementById("timer").textContent = "00:00";
+      goTo(9);
+    }
+
+    function finishEarly() {
+      clearInterval(timerInterval);
+
+      if (confirm("هل تريد إنهاء التحدي الآن؟")) {
+        goTo(9);
+      } else {
+        startChallenge();
+      }
+    }
+
+    function restartDay() {
+      clearInterval(timerInterval);
+      activity = "";
+      endTime = "";
+      limitHours = 5;
+      remainingSeconds = 1800;
+
+      document.getElementById("endTime").value = "";
+      document.getElementById("customArea").innerHTML = "";
+
+      goTo(1);
     }
   </script>
 
