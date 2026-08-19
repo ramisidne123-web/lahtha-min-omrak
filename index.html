@@ -48,12 +48,17 @@
     button:hover {
       opacity: 0.9;
     }
+
+    #app {
+      display: none;
+      padding: 40px 20px;
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <div class="container" id="welcome">
     <h1>لحظة من عمرك</h1>
 
     <p>
@@ -69,9 +74,18 @@
     </button>
   </div>
 
+  <div id="app">
+    <h1>أهلًا بك في لحظة من عمرك ❤️</h1>
+
+    <p>
+      اختر ما تريد القيام به.
+    </p>
+  </div>
+
   <script>
     function startApp() {
-      alert("مرحبًا بك في لحظة من عمرك ❤️");
+      document.getElementById("welcome").style.display = "none";
+      document.getElementById("app").style.display = "block";
     }
   </script>
 
