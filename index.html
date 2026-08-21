@@ -168,7 +168,6 @@ margin:20px 0
 </div>
 </section>
 
-
 <section class="screen" id="screen2">
 <div class="box">
 
@@ -200,7 +199,6 @@ margin:20px 0
 </div>
 </section>
 
-
 <section class="screen" id="screen3">
 <div class="box">
 
@@ -227,7 +225,6 @@ margin:20px 0
 
 </div>
 </section>
-
 
 <section class="screen" id="screen4">
 <div class="box">
@@ -267,7 +264,6 @@ margin:20px 0
 </div>
 </section>
 
-
 <section class="screen" id="screen5">
 <div class="box">
 
@@ -298,7 +294,6 @@ margin:20px 0
 
 </div>
 </section>
-
 
 <section class="screen" id="screen6">
 <div class="box">
@@ -332,7 +327,6 @@ margin:20px 0
 </div>
 </section>
 
-
 <section class="screen" id="screen7">
 <div class="box">
 
@@ -360,7 +354,6 @@ margin:20px 0
 
 </div>
 </section>
-
 
 <section class="screen" id="screen11">
 <div class="box">
@@ -391,7 +384,6 @@ margin:20px 0
 </div>
 </section>
 
-
 <section class="screen" id="screen12">
 <div class="box">
 
@@ -420,7 +412,6 @@ margin:20px 0
 
 </div>
 </section>
-
 
 <section class="screen" id="screen8">
 <div class="box">
@@ -455,7 +446,6 @@ margin:20px 0
 </div>
 </section>
 
-
 <section class="screen" id="screen9">
 <div class="box">
 
@@ -489,7 +479,6 @@ margin:20px 0
 </div>
 </section>
 
-
 <section class="screen" id="screen10">
 <div class="box">
 
@@ -519,28 +508,88 @@ margin:20px 0
 </div>
 </section>
 
+<script>
+  <section class="screen" id="screen8"><div class="box">
+<div class="tag">🌱 التحدي بدأ</div><h2 id="challengeTitle"></h2><p class="challenge-description" id="challengeDescription"></p>
+<div class="points-card">⭐ النقاط عند النجاح: <span id="challengePoints">+10</span></div>
+<p>ضع الهاتف جانبًا ونفّذ التحدي حتى ينتهي الوقت.</p><div class="timer" id="timer">10:00</div>
+<p class="small">يمكنك إنهاء التحدي مبكرًا إذا احتجت.</p><button class="back" onclick="finishEarly()">إنهاء التحدي الآن</button>
+</div></section>
+
+<section class="screen" id="screen9"><div class="box">
+<div class="success">🏆 أحسنت!</div><h2 id="successTitle">لقد أنجزت لحظة نافعة من عمرك.</h2>
+<div class="points-card">⭐ +<span id="earnedPoints">10</span> نقطة</div><div class="summary">مجموع نقاطك: <b><span id="totalPoints">0</span></b></div>
+<p>لحظتك لم تذهب سدى. 🌱</p><button class="primary" onclick="restartDay()">العودة للبداية</button>
+</div></section>
+
+<section class="screen" id="screen10"><div class="box">
+<div class="big">⏸️</div><h2>التحدي متوقف</h2><p>أنهيت التحدي قبل انتهاء الوقت.</p><p class="small">لم تتم إضافة النقاط لأن التحدي لم يكتمل.</p>
+<div class="points-card">⭐ نقاطك: <span id="pointsEarly">0</span></div>
+<button class="primary" onclick="startChallenge()">تجربة تحدٍّ آخر</button><button class="back" onclick="restartDay()">العودة للبداية</button>
+</div></section>
 
 <script>
-
-let activity="";
-let endTime="";
-let limitHours=5;
-
-let timerInterval=null;
-let personalTimerInterval=null;
-
-let remainingSeconds=600;
-let challengeRunning=false;
-
-let personalTargetTime=null;
-let currentContent=null;
-let currentChallenge=null;
-let notificationSent=false;
-
-
-/* المحتوى الروحي */
+let activity="",endTime="",limitHours=5,timerInterval=null,personalTimerInterval=null,remainingSeconds=600,challengeRunning=false,personalTargetTime=null,currentContent=null,currentChallenge=null,notificationSent=false;
 
 const spiritualContents=[
+{title:"🌙 لحظة لآخرتك",badge:"سورة العصر",text:"﴿وَالْعَصْرِ ۝ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ﴾",source:"سورة العصر",idea:"عمرك ليس فقط الساعات التي تعيشها، بل ما تضعه في هذه الساعات من عمل نافع.",question:"🎯 هل تريد أن تستعيد جزءًا من عمرك الآن؟"},
+{title:"☀️ لحظة أمل",badge:"سورة الضحى",text:"﴿وَالضُّحَى ۝ وَاللَّيْلِ إِذَا سَجَى ۝ مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَى﴾",source:"سورة الضحى",idea:"قد تمر بك لحظات ثقيلة، لكن الأمل قد يبدأ بلحظة صادقة.",question:"🎯 خذ لحظتك الآن واجعلها بداية لشيء نافع."},
+{title:"🌱 لحظة تفاؤل",badge:"سورة الشرح",text:"﴿فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾",source:"سورة الشرح",idea:"لا تجعل صعوبة اليوم سببًا لإضاعة كل يومك. ابدأ بخطوة صغيرة.",question:"🎯 هل تستطيع أن تمنح نفسك لحظة هادئة الآن؟"},
+{title:"⏳ لحظة مع الوقت",badge:"سورة التكاثر",text:"﴿أَلْهَاكُمُ التَّكَاثُرُ ۝ حَتَّىٰ زُرْتُمُ الْمَقَابِرَ﴾",source:"سورة التكاثر",idea:"كثرة الانشغال قد تجعل الإنسان ينسى قيمة الوقت الذي بين يديه.",question:"🎯 توقف قليلًا واسأل نفسك: أين يذهب وقتي؟"},
+{title:"🌌 لحظة تفكر",badge:"سورة الملك",text:"﴿الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا﴾",source:"سورة الملك",idea:"قيمة الوقت ليست في كثرته فقط، بل في جودة ما نفعله خلاله.",question:"🎯 اختر عملًا واحدًا نافعًا وامنحه وقتك الآن."}
+];
+
+const challenges=[
+{title:"📵 تحدي 10 دقائق بدون هاتف",description:"ضع الهاتف جانبًا لمدة 10 دقائق. لا تفتح أي تطبيق واستعمل الوقت في الهدوء أو التفكير.",seconds:600,points:10},
+{title:"📖 تحدي 15 دقيقة قراءة",description:"اختر كتابًا أو مادة نافعة واقرأ بهدوء لمدة 15 دقيقة.",seconds:900,points:15},
+{title:"🧠 تحدي 10 دقائق تفكر",description:"ابتعد عن الهاتف وخذ 10 دقائق للتفكير في يومك وما الشيء الذي تريد تحسينه.",seconds:600,points:10},
+{title:"💪 تحدي 20 دقيقة عمل نافع",description:"اختر مهمة مهمة بالنسبة لك وركز عليها 20 دقيقة دون تشتت.",seconds:1200,points:20},
+{title:"🌿 تحدي 15 دقيقة هدوء",description:"اترك الهاتف جانبًا واجلس في مكان هادئ لمدة 15 دقيقة.",seconds:900,points:15}
+];
+
+function getPoints(){const v=Number(localStorage.getItem("lahthaPoints"));return Number.isFinite(v)&&v>=0?v:0}
+function savePoints(v){localStorage.setItem("lahthaPoints",String(v));updatePointsDisplay()}
+function addPoints(v){savePoints(getPoints()+v)}
+function updatePointsDisplay(){
+ const p=getPoints();
+ const a=document.getElementById("pointsStart"),b=document.getElementById("pointsScreen6"),c=document.getElementById("totalPoints"),d=document.getElementById("pointsEarly");
+ if(a)a.textContent="⭐ نقاطك: "+p;if(b)b.textContent=p;if(c)c.textContent=p;if(d)d.textContent=p;
+}
+function goTo(n){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));const t=document.getElementById("screen"+n);if(t)t.classList.add("active");updatePointsDisplay();scrollTo(0,0)}
+function chooseActivity(v){activity=v;document.getElementById("activityTitle").textContent=v==="أدرس"?"ممتاز 📚":v==="أعمل"?"ممتاز 🧑‍💼":v==="أعمل وأدرس"?"ممتاز 📚💼":"تمام 🏠";goTo(3)}
+function saveEndTime(){
+ const i=document.getElementById("endTime");if(!i.value){alert("اختر وقت الانتهاء أولًا.");return}
+ endTime=i.value;localStorage.setItem("lahthaActivity",activity);localStorage.setItem("lahthaEndTime",endTime);
+ document.getElementById("summaryTime").textContent=activity+" — ينتهي الوقت: "+endTime;goTo(4)
+}
+function chooseLimit(h){limitHours=h;document.getElementById("customArea").innerHTML="";saveSettings();goTo(5)}
+function chooseCustom(){document.getElementById("customArea").innerHTML='<input type="number" id="customHours" min="1" max="12" placeholder="عدد الساعات"><button onclick="saveCustomLimit()">تأكيد المدة</button>'}
+function saveCustomLimit(){const v=Number(document.getElementById("customHours").value);if(!Number.isInteger(v)||v<1||v>12){alert("أدخل عدد ساعات صحيحًا بين 1 و12.");return}chooseLimit(v)}
+function getTargetTime(){
+ if(!endTime)return null;const p=endTime.split(":"),now=new Date(),t=new Date(now.getFullYear(),now.getMonth(),now.getDate(),Number(p[0]),Number(p[1]),0,0);t.setTime(t.getTime()+limitHours*3600000);return t
+}<script>
+
+let activity = "";
+let endTime = "";
+let limitHours = 5;
+
+let timerInterval = null;
+let personalTimerInterval = null;
+
+let remainingSeconds = 600;
+let challengeRunning = false;
+
+let personalTargetTime = null;
+let currentContent = null;
+let currentChallenge = null;
+let notificationSent = false;
+
+
+/* =========================
+   المحتوى الروحي
+========================= */
+
+const spiritualContents = [
 
 {
 title:"🌙 لحظة لآخرتك",
@@ -590,9 +639,11 @@ question:"🎯 اختر عملًا واحدًا نافعًا وامنحه وقت
 ];
 
 
-/* التحديات */
+/* =========================
+   التحديات
+========================= */
 
-const challenges=[
+const challenges = [
 
 {
 title:"📵 تحدي 10 دقائق بدون هاتف",
@@ -632,20 +683,29 @@ points:15
 ];
 
 
-/* النقاط */
+/* =========================
+   النقاط
+========================= */
 
 function getPoints(){
 
-const value=Number(localStorage.getItem("lahthaPoints"));
+const value = Number(
+localStorage.getItem("lahthaPoints")
+);
 
-return Number.isFinite(value)&&value>=0?value:0;
+return Number.isFinite(value) && value >= 0
+? value
+: 0;
 
 }
 
 
 function savePoints(value){
 
-localStorage.setItem("lahthaPoints",String(value));
+localStorage.setItem(
+"lahthaPoints",
+String(value)
+);
 
 updatePointsDisplay();
 
@@ -654,40 +714,66 @@ updatePointsDisplay();
 
 function addPoints(value){
 
-savePoints(getPoints()+value);
+savePoints(
+getPoints() + value
+);
 
 }
 
 
 function updatePointsDisplay(){
 
-const points=getPoints();
+const points = getPoints();
 
-const start=document.getElementById("pointsStart");
-const screen6=document.getElementById("pointsScreen6");
-const total=document.getElementById("totalPoints");
-const early=document.getElementById("pointsEarly");
+const start =
+document.getElementById("pointsStart");
 
-if(start)start.textContent="⭐ نقاطك: "+points;
-if(screen6)screen6.textContent=points;
-if(total)total.textContent=points;
-if(early)early.textContent=points;
+const screen6 =
+document.getElementById("pointsScreen6");
+
+const total =
+document.getElementById("totalPoints");
+
+const early =
+document.getElementById("pointsEarly");
+
+if(start)
+start.textContent =
+"⭐ نقاطك: " + points;
+
+if(screen6)
+screen6.textContent = points;
+
+if(total)
+total.textContent = points;
+
+if(early)
+early.textContent = points;
 
 }
 
 
-/* التنقل */
+/* =========================
+   التنقل بين الصفحات
+========================= */
 
 function goTo(number){
 
-document.querySelectorAll(".screen").forEach(function(screen){
+document
+.querySelectorAll(".screen")
+.forEach(function(screen){
+
 screen.classList.remove("active");
+
 });
 
-const target=document.getElementById("screen"+number);
+const target =
+document.getElementById("screen" + number);
 
 if(target){
+
 target.classList.add("active");
+
 }
 
 updatePointsDisplay();
@@ -697,25 +783,37 @@ window.scrollTo(0,0);
 }
 
 
-/* اختيار النشاط */
+/* =========================
+   اختيار النشاط
+========================= */
 
 function chooseActivity(value){
 
-activity=value;
+activity = value;
 
-const title=document.getElementById("activityTitle");
+const title =
+document.getElementById("activityTitle");
 
-if(value==="أدرس"){
-title.textContent="ممتاز 📚";
+if(value === "أدرس"){
+
+title.textContent = "ممتاز 📚";
+
 }
-else if(value==="أعمل"){
-title.textContent="ممتاز 🧑‍💼";
+else if(value === "أعمل"){
+
+title.textContent = "ممتاز 🧑‍💼";
+
 }
-else if(value==="أعمل وأدرس"){
-title.textContent="ممتاز 🧑‍💼📚";
+else if(value === "أعمل وأدرس"){
+
+title.textContent =
+"ممتاز 🧑‍💼📚";
+
 }
 else{
-title.textContent="تمام 🏠";
+
+title.textContent = "تمام 🏠";
+
 }
 
 goTo(3);
@@ -723,40 +821,60 @@ goTo(3);
 }
 
 
-/* وقت الانتهاء */
+/* =========================
+   حفظ وقت الانتهاء
+========================= */
 
 function saveEndTime(){
 
-const input=document.getElementById("endTime");
+const input =
+document.getElementById("endTime");
 
 if(!input.value){
 
-alert("اختر وقت الانتهاء أولًا.");
+alert(
+"اختر وقت الانتهاء أولًا."
+);
 
 return;
 
 }
 
-endTime=input.value;
+endTime = input.value;
 
-localStorage.setItem("lahthaActivity",activity);
-localStorage.setItem("lahthaEndTime",endTime);
+localStorage.setItem(
+"lahthaActivity",
+activity
+);
 
-document.getElementById("summaryTime").textContent=
-activity+" — ينتهي الوقت: "+endTime;
+localStorage.setItem(
+"lahthaEndTime",
+endTime
+);
+
+document.getElementById(
+"summaryTime"
+).textContent =
+activity +
+" — ينتهي الوقت: " +
+endTime;
 
 goTo(4);
 
 }
 
 
-/* الساعات */
+/* =========================
+   اختيار عدد الساعات
+========================= */
 
 function chooseLimit(hours){
 
-limitHours=hours;
+limitHours = hours;
 
-document.getElementById("customArea").innerHTML="";
+document.getElementById(
+"customArea"
+).innerHTML = "";
 
 saveSettings();
 
@@ -767,8 +885,12 @@ goTo(5);
 
 function chooseCustom(){
 
-document.getElementById("customArea").innerHTML=
-'<input type="number" id="customHours" min="1" max="12" placeholder="عدد الساعات">'+
+document.getElementById(
+"customArea"
+).innerHTML =
+
+'<input type="number" id="customHours" min="1" max="12" placeholder="عدد الساعات">' +
+
 '<button onclick="saveCustomLimit()">تأكيد</button>';
 
 }
@@ -776,13 +898,23 @@ document.getElementById("customArea").innerHTML=
 
 function saveCustomLimit(){
 
-const input=document.getElementById("customHours");
+const input =
+document.getElementById(
+"customHours"
+);
 
-const value=Number(input.value);
+const value =
+Number(input.value);
 
-if(!Number.isInteger(value)||value<1||value>12){
+if(
+!Number.isInteger(value) ||
+value < 1 ||
+value > 12
+){
 
-alert("أدخل عدد ساعات صحيحًا بين 1 و12.");
+alert(
+"أدخل عدد ساعات صحيحًا بين 1 و12."
+);
 
 return;
 
@@ -793,7 +925,9 @@ chooseLimit(value);
 }
 
 
-/* حفظ الإعدادات */
+/* =========================
+   حفظ الإعدادات
+========================= */
 
 function saveSettings(){
 
@@ -802,34 +936,53 @@ localStorage.setItem(
 String(limitHours)
 );
 
-notificationSent=false;
+notificationSent = false;
 
-localStorage.removeItem("lahthaNotificationSent");
+localStorage.removeItem(
+"lahthaNotificationSent"
+);
 
-document.getElementById("finalSettings").innerHTML=
-"📌 "+activity+
-"<br>🕑 وقت الانتهاء: "+endTime+
-"<br>⏳ التنبيه بعد: "+limitHours+" ساعات";
+document.getElementById(
+"finalSettings"
+).innerHTML =
+
+"📌 " + activity +
+
+"<br>🕑 وقت الانتهاء: " +
+endTime +
+
+"<br>⏳ التنبيه بعد: " +
+limitHours +
+" ساعات";
 
 startPersonalTimer();
 
 }
 
 
-/* حساب وقت التنبيه */
+/* =========================
+   حساب وقت التنبيه
+========================= */
 
 function getTargetTime(){
 
-if(!endTime)return null;
+if(!endTime)
+return null;
 
-const parts=endTime.split(":");
+const parts =
+endTime.split(":");
 
-const hours=Number(parts[0]);
-const minutes=Number(parts[1]);
+const hours =
+Number(parts[0]);
 
-const now=new Date();
+const minutes =
+Number(parts[1]);
 
-const target=new Date(
+const now =
+new Date();
+
+const target =
+new Date(
 now.getFullYear(),
 now.getMonth(),
 now.getDate(),
@@ -840,7 +993,8 @@ minutes,
 );
 
 target.setTime(
-target.getTime()+limitHours*3600000
+target.getTime() +
+limitHours * 3600000
 );
 
 return target;
@@ -848,17 +1002,23 @@ return target;
 }
 
 
-/* تشغيل العداد الشخصي */
+/* =========================
+   تشغيل عداد الوقت الشخصي
+========================= */
 
 function startPersonalTimer(){
 
-clearInterval(personalTimerInterval);
+clearInterval(
+personalTimerInterval
+);
 
-personalTargetTime=getTargetTime();
+personalTargetTime =
+getTargetTime();
 
 updatePersonalTimer();
 
-personalTimerInterval=setInterval(
+personalTimerInterval =
+setInterval(
 updatePersonalTimer,
 1000
 );
@@ -866,57 +1026,83 @@ updatePersonalTimer,
 }
 
 
-/* عند انتهاء الوقت */
+/* =========================
+   انتهاء الوقت
+========================= */
 
 function timeFinished(){
 
-if(notificationSent)return;
+if(notificationSent)
+return;
 
-notificationSent=true;
+notificationSent = true;
 
 localStorage.setItem(
 "lahthaNotificationSent",
 "true"
 );
 
-const message=
+const message =
 "🔔 حان وقت لحظتك من عمرك. لقد انتهت المدة التي حددتها.";
 
-const alertMessage=document.getElementById("alertMessage");
+const alertMessage =
+document.getElementById(
+"alertMessage"
+);
 
 if(alertMessage){
-alertMessage.textContent=message;
+
+alertMessage.textContent =
+message;
+
 }
 
 showNotification();
 
 if(navigator.vibrate){
-navigator.vibrate([300,150,300,150,500]);
+
+navigator.vibrate(
+[300,150,300,150,500]
+);
+
 }
 
 alert(message);
 
 goTo(6);
 
-clearInterval(personalTimerInterval);
+clearInterval(
+personalTimerInterval
+);
 
 }
 
 
-/* عداد الوقت */
+/* =========================
+   عداد الوقت الشخصي
+========================= */
 
 function updatePersonalTimer(){
 
-const status=document.getElementById("countdownStatus");
+const status =
+document.getElementById(
+"countdownStatus"
+);
 
-if(!status||!personalTargetTime)return;
+if(
+!status ||
+!personalTargetTime
+)
+return;
 
-const difference=
-personalTargetTime.getTime()-Date.now();
+const difference =
+personalTargetTime.getTime()
+- Date.now();
 
-if(difference<=0){
+if(difference <= 0){
 
-status.textContent="🔔 حان وقت التنبيه.";
+status.textContent =
+"🔔 حان وقت التنبيه.";
 
 timeFinished();
 
@@ -924,24 +1110,42 @@ return;
 
 }
 
-const seconds=Math.floor(difference/1000);
+const seconds =
+Math.floor(
+difference / 1000
+);
 
-const hours=Math.floor(seconds/3600);
+const hours =
+Math.floor(
+seconds / 3600
+);
 
-const minutes=Math.floor((seconds%3600)/60);
+const minutes =
+Math.floor(
+(seconds % 3600) / 60
+);
 
-const secs=seconds%60;
+const secs =
+seconds % 60;
 
-status.textContent=
-"⏳ الوقت المتبقي: "+
-String(hours).padStart(2,"0")+":"+
-String(minutes).padStart(2,"0")+":"+
+status.textContent =
+
+"⏳ الوقت المتبقي: " +
+
+String(hours).padStart(2,"0") +
+":" +
+
+String(minutes).padStart(2,"0") +
+":" +
+
 String(secs).padStart(2,"0");
 
 }
 
 
-/* الإشعارات */
+/* =========================
+   الإشعارات
+========================= */
 
 function requestNotificationPermission(){
 
@@ -955,18 +1159,23 @@ return;
 
 }
 
-Notification.requestPermission().then(function(permission){
+Notification
+.requestPermission()
+.then(function(permission){
 
-if(permission==="granted"){
+if(permission === "granted"){
 
 new Notification(
 "🌱 لحظة من عمرك",
 {
-body:"تم تفعيل الإشعارات بنجاح."
+body:
+"تم تفعيل الإشعارات بنجاح."
 }
 );
 
-alert("✅ تم تفعيل الإشعارات.");
+alert(
+"✅ تم تفعيل الإشعارات."
+);
 
 }
 else{
@@ -986,13 +1195,14 @@ function showNotification(){
 
 if(
 "Notification" in window &&
-Notification.permission==="granted"
+Notification.permission === "granted"
 ){
 
 new Notification(
 "⏳ لحظة من عمرك",
 {
-body:"🔔 حان الوقت الذي حددته لنفسك."
+body:
+"🔔 حان الوقت الذي حددته لنفسك."
 }
 );
 
@@ -1001,16 +1211,21 @@ body:"🔔 حان الوقت الذي حددته لنفسك."
 }
 
 
-/* المسار */
+/* =========================
+   اختيار المسار
+========================= */
 
 function choosePath(path){
 
-if(path==="آخرتي"){
+/* آخرتي */
 
-currentContent=
+if(path === "آخرتي"){
+
+currentContent =
 spiritualContents[
 Math.floor(
-Math.random()*spiritualContents.length
+Math.random() *
+spiritualContents.length
 )
 ];
 
@@ -1022,7 +1237,10 @@ return;
 
 }
 
-if(path==="دنياي"){
+
+/* دنياي */
+
+if(path === "دنياي"){
 
 goTo(11);
 
@@ -1033,7 +1251,9 @@ return;
 }
 
 
-/* سأكمل */
+/* =========================
+   سأكمل
+========================= */
 
 function continuePhone(){
 
@@ -1042,97 +1262,149 @@ goTo(12);
 }
 
 
-/* المحتوى الروحي */
+/* =========================
+   عرض المحتوى الروحي
+========================= */
 
 function displayCurrentContent(){
 
 if(!currentContent){
-currentContent=spiritualContents[0];
+
+currentContent =
+spiritualContents[0];
+
 }
 
-document.getElementById("contentTitle").textContent=
+document.getElementById(
+"contentTitle"
+).textContent =
 currentContent.title;
 
-document.getElementById("contentBadge").textContent=
+document.getElementById(
+"contentBadge"
+).textContent =
 currentContent.badge;
 
-document.getElementById("contentText").textContent=
+document.getElementById(
+"contentText"
+).textContent =
 currentContent.text;
 
-document.getElementById("contentSource").textContent=
+document.getElementById(
+"contentSource"
+).textContent =
 currentContent.source;
 
-document.getElementById("contentIdea").textContent=
-"💡 "+currentContent.idea;
+document.getElementById(
+"contentIdea"
+).textContent =
+"💡 " + currentContent.idea;
 
-document.getElementById("challengeQuestion").textContent=
+document.getElementById(
+"challengeQuestion"
+).textContent =
 currentContent.question;
 
 }
 
 
-/* التحدي الروحي */
+/* =========================
+   التحدي الروحي
+========================= */
 
 function startChallenge(){
 
-startSelectedChallenge(
+const challenge =
 challenges[
-Math.floor(Math.random()*challenges.length)
-]
+Math.floor(
+Math.random() *
+challenges.length
+)
+];
+
+startSelectedChallenge(
+challenge
 );
 
 }
 
 
-/* التحدي الدنيوي */
+/* =========================
+   التحدي الدنيوي
+========================= */
 
 function startWorldChallenge(){
 
-startSelectedChallenge(
+const challenge =
 challenges[
-Math.floor(Math.random()*challenges.length)
-]
+Math.floor(
+Math.random() *
+challenges.length
+)
+];
+
+startSelectedChallenge(
+challenge
 );
 
 }
 
 
-/* تشغيل التحدي */
+/* =========================
+   تشغيل التحدي
+========================= */
 
-function startSelectedChallenge(challenge){
+function startSelectedChallenge(
+challenge
+){
 
-clearInterval(timerInterval);
+clearInterval(
+timerInterval
+);
 
-currentChallenge=challenge;
+currentChallenge =
+challenge;
 
-remainingSeconds=challenge.seconds;
+remainingSeconds =
+challenge.seconds;
 
-challengeRunning=true;
+challengeRunning =
+true;
 
-document.getElementById("challengeTitle").textContent=
+document.getElementById(
+"challengeTitle"
+).textContent =
 challenge.title;
 
-document.getElementById("challengeDescription").textContent=
+document.getElementById(
+"challengeDescription"
+).textContent =
 challenge.description;
 
-document.getElementById("challengePoints").textContent=
-"+"+challenge.points;
+document.getElementById(
+"challengePoints"
+).textContent =
+"+" + challenge.points;
 
 updateTimer();
 
 goTo(8);
 
-timerInterval=setInterval(function(){
+timerInterval =
+setInterval(function(){
 
 remainingSeconds--;
 
-if(remainingSeconds<=0){
+if(remainingSeconds <= 0){
 
-remainingSeconds=0;
+remainingSeconds = 0;
 
-clearInterval(timerInterval);
+clearInterval(
+timerInterval
+);
 
-challengeRunning=false;
+challengeRunning =
+false;
 
 updateTimer();
 
@@ -1149,126 +1421,198 @@ updateTimer();
 }
 
 
-/* عداد التحدي */
+/* =========================
+   عداد التحدي
+========================= */
 
 function updateTimer(){
 
-const timer=document.getElementById("timer");
+const timer =
+document.getElementById(
+"timer"
+);
 
-if(!timer)return;
+if(!timer)
+return;
 
-const minutes=Math.floor(remainingSeconds/60);
+const minutes =
+Math.floor(
+remainingSeconds / 60
+);
 
-const seconds=remainingSeconds%60;
+const seconds =
+remainingSeconds % 60;
 
-timer.textContent=
-String(minutes).padStart(2,"0")+":"+
+timer.textContent =
+
+String(minutes).padStart(2,"0") +
+":" +
+
 String(seconds).padStart(2,"0");
 
 }
 
 
-/* إكمال التحدي */
+/* =========================
+   إكمال التحدي
+========================= */
 
 function completeChallenge(){
 
-clearInterval(timerInterval);
+clearInterval(
+timerInterval
+);
 
-challengeRunning=false;
+challengeRunning =
+false;
 
-if(!currentChallenge)return;
+if(!currentChallenge)
+return;
 
-const earned=currentChallenge.points;
+const earned =
+currentChallenge.points;
 
 addPoints(earned);
 
-document.getElementById("earnedPoints").textContent=
+document.getElementById(
+"earnedPoints"
+).textContent =
 earned;
 
-document.getElementById("successTitle").textContent=
-"أحسنت! أنجزت "+currentChallenge.title;
+document.getElementById(
+"successTitle"
+).textContent =
+"أحسنت! أنجزت " +
+currentChallenge.title;
 
 goTo(9);
 
 }
 
 
-/* إنهاء مبكر */
+/* =========================
+   إنهاء التحدي مبكرًا
+========================= */
 
 function finishEarly(){
 
-if(!challengeRunning)return;
+if(!challengeRunning)
+return;
 
-const confirmed=confirm(
+const confirmed =
+confirm(
 "هل تريد إنهاء التحدي الآن؟\n\nلن تحصل على نقاط لأن التحدي لم يكتمل."
 );
 
-if(!confirmed)return;
+if(!confirmed)
+return;
 
-clearInterval(timerInterval);
+clearInterval(
+timerInterval
+);
 
-challengeRunning=false;
+challengeRunning =
+false;
 
 goTo(10);
 
 }
 
 
-/* إعادة البداية */
+/* =========================
+   العودة للبداية
+========================= */
 
 function restartDay(){
 
-clearInterval(timerInterval);
+clearInterval(
+timerInterval
+);
 
-activity="";
-endTime="";
-limitHours=5;
+clearInterval(
+personalTimerInterval
+);
 
-currentContent=null;
-currentChallenge=null;
-personalTargetTime=null;
+activity = "";
+endTime = "";
+limitHours = 5;
 
-document.getElementById("endTime").value="";
-document.getElementById("customArea").innerHTML="";
+currentContent = null;
+currentChallenge = null;
+personalTargetTime = null;
+
+notificationSent = false;
+
+document.getElementById(
+"endTime"
+).value = "";
+
+document.getElementById(
+"customArea"
+).innerHTML = "";
 
 goTo(1);
 
 }
 
 
-/* تحميل البيانات */
+/* =========================
+   تحميل البيانات المحفوظة
+========================= */
 
 function loadSavedData(){
 
-const savedActivity=
-localStorage.getItem("lahthaActivity");
+const savedActivity =
+localStorage.getItem(
+"lahthaActivity"
+);
 
-const savedEndTime=
-localStorage.getItem("lahthaEndTime");
+const savedEndTime =
+localStorage.getItem(
+"lahthaEndTime"
+);
 
-const savedLimit=
-Number(localStorage.getItem("lahthaLimitHours"));
+const savedLimit =
+Number(
+localStorage.getItem(
+"lahthaLimitHours"
+)
+);
 
 if(savedActivity){
-activity=savedActivity;
+
+activity =
+savedActivity;
+
 }
 
 if(savedEndTime){
 
-endTime=savedEndTime;
+endTime =
+savedEndTime;
 
-document.getElementById("endTime").value=
+const input =
+document.getElementById(
+"endTime"
+);
+
+if(input){
+
+input.value =
 savedEndTime;
 
 }
 
+}
+
 if(
-Number.isInteger(savedLimit)&&
-savedLimit>=1&&
-savedLimit<=12
+Number.isInteger(savedLimit) &&
+savedLimit >= 1 &&
+savedLimit <= 12
 ){
 
-limitHours=savedLimit;
+limitHours =
+savedLimit;
 
 }
 
@@ -1276,7 +1620,8 @@ updatePointsDisplay();
 
 if(endTime){
 
-personalTargetTime=getTargetTime();
+personalTargetTime =
+getTargetTime();
 
 startPersonalTimer();
 
@@ -1285,7 +1630,9 @@ startPersonalTimer();
 }
 
 
-/* تشغيل التطبيق */
+/* =========================
+   تشغيل التطبيق
+========================= */
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -1299,6 +1646,3 @@ updatePointsDisplay();
 );
 
 </script>
-
-</body>
-</html>
