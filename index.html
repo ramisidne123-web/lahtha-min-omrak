@@ -149,8 +149,11 @@ margin:20px 0
 
 <body>
 
+<!-- الشاشة 1 -->
+
 <section class="screen active" id="screen1">
 <div class="box">
+
 <h1>🌱 لحظة من عمرك</h1>
 
 <p>لن نأخذ من وقتك إلا لحظة.</p>
@@ -164,9 +167,15 @@ margin:20px 0
 ⭐ نقاطك: 0
 </div>
 
-<button onclick="goTo(2)">ابدأ</button>
+<button onclick="goTo(2)">
+ابدأ
+</button>
+
 </div>
 </section>
+
+
+<!-- الشاشة 2 -->
 
 <section class="screen" id="screen2">
 <div class="box">
@@ -174,6 +183,7 @@ margin:20px 0
 <h1>🌱 لحظة من عمرك</h1>
 
 <p>ما الذي تفعله في أغلب يومك؟</p>
+
 <p>اختر واحدًا فقط:</p>
 
 <button class="option" onclick="chooseActivity('أعمل')">
@@ -199,12 +209,19 @@ margin:20px 0
 </div>
 </section>
 
+
+<!-- الشاشة 3 -->
+
 <section class="screen" id="screen3">
 <div class="box">
 
-<h2 id="activityTitle">ممتاز 📚</h2>
+<h2 id="activityTitle">
+ممتاز 📚
+</h2>
 
-<p>متى تنتهي دراستك أو عملك عادةً؟</p>
+<p>
+متى تنتهي دراستك أو عملك عادةً؟
+</p>
 
 <p>
 اختر وقت الانتهاء حتى يبدأ التطبيق
@@ -217,7 +234,9 @@ margin:20px 0
 
 <input type="time" id="endTime">
 
-<button onclick="saveEndTime()">التالي</button>
+<button onclick="saveEndTime()">
+التالي
+</button>
 
 <button class="option" onclick="goTo(2)">
 رجوع
@@ -225,6 +244,9 @@ margin:20px 0
 
 </div>
 </section>
+
+
+<!-- الشاشة 4 -->
 
 <section class="screen" id="screen4">
 <div class="box">
@@ -264,6 +286,9 @@ margin:20px 0
 </div>
 </section>
 
+
+<!-- الشاشة 5 -->
+
 <section class="screen" id="screen5">
 <div class="box">
 
@@ -295,6 +320,9 @@ margin:20px 0
 </div>
 </section>
 
+
+<!-- الشاشة 6 -->
+
 <section class="screen" id="screen6">
 <div class="box">
 
@@ -321,16 +349,22 @@ margin:20px 0
 </button>
 
 <div class="total-points">
-⭐ نقاطك: <span id="pointsScreen6">0</span>
+⭐ نقاطك:
+<span id="pointsScreen6">0</span>
 </div>
 
 </div>
 </section>
 
+
+<!-- الشاشة 7 -->
+
 <section class="screen" id="screen7">
 <div class="box">
 
-<h2 id="contentTitle">🌙 لحظة لآخرتك</h2>
+<h2 id="contentTitle">
+🌙 لحظة لآخرتك
+</h2>
 
 <div class="badge" id="contentBadge">
 رسالة اليوم
@@ -354,6 +388,9 @@ margin:20px 0
 
 </div>
 </section>
+
+
+<!-- الشاشة 11 دنياي -->
 
 <section class="screen" id="screen11">
 <div class="box">
@@ -384,6 +421,9 @@ margin:20px 0
 </div>
 </section>
 
+
+<!-- الشاشة 12 سأكمل -->
+
 <section class="screen" id="screen12">
 <div class="box">
 
@@ -412,6 +452,9 @@ margin:20px 0
 
 </div>
 </section>
+
+
+<!-- الشاشة 8 التحدي -->
 
 <section class="screen" id="screen8">
 <div class="box">
@@ -446,6 +489,9 @@ margin:20px 0
 </div>
 </section>
 
+
+<!-- الشاشة 9 النجاح -->
+
 <section class="screen" id="screen9">
 <div class="box">
 
@@ -479,6 +525,9 @@ margin:20px 0
 </div>
 </section>
 
+
+<!-- الشاشة 10 التحدي المتوقف -->
+
 <section class="screen" id="screen10">
 <div class="box">
 
@@ -508,66 +557,8 @@ margin:20px 0
 </div>
 </section>
 
-<script>
-  <section class="screen" id="screen8"><div class="box">
-<div class="tag">🌱 التحدي بدأ</div><h2 id="challengeTitle"></h2><p class="challenge-description" id="challengeDescription"></p>
-<div class="points-card">⭐ النقاط عند النجاح: <span id="challengePoints">+10</span></div>
-<p>ضع الهاتف جانبًا ونفّذ التحدي حتى ينتهي الوقت.</p><div class="timer" id="timer">10:00</div>
-<p class="small">يمكنك إنهاء التحدي مبكرًا إذا احتجت.</p><button class="back" onclick="finishEarly()">إنهاء التحدي الآن</button>
-</div></section>
-
-<section class="screen" id="screen9"><div class="box">
-<div class="success">🏆 أحسنت!</div><h2 id="successTitle">لقد أنجزت لحظة نافعة من عمرك.</h2>
-<div class="points-card">⭐ +<span id="earnedPoints">10</span> نقطة</div><div class="summary">مجموع نقاطك: <b><span id="totalPoints">0</span></b></div>
-<p>لحظتك لم تذهب سدى. 🌱</p><button class="primary" onclick="restartDay()">العودة للبداية</button>
-</div></section>
-
-<section class="screen" id="screen10"><div class="box">
-<div class="big">⏸️</div><h2>التحدي متوقف</h2><p>أنهيت التحدي قبل انتهاء الوقت.</p><p class="small">لم تتم إضافة النقاط لأن التحدي لم يكتمل.</p>
-<div class="points-card">⭐ نقاطك: <span id="pointsEarly">0</span></div>
-<button class="primary" onclick="startChallenge()">تجربة تحدٍّ آخر</button><button class="back" onclick="restartDay()">العودة للبداية</button>
-</div></section>
 
 <script>
-let activity="",endTime="",limitHours=5,timerInterval=null,personalTimerInterval=null,remainingSeconds=600,challengeRunning=false,personalTargetTime=null,currentContent=null,currentChallenge=null,notificationSent=false;
-
-const spiritualContents=[
-{title:"🌙 لحظة لآخرتك",badge:"سورة العصر",text:"﴿وَالْعَصْرِ ۝ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ﴾",source:"سورة العصر",idea:"عمرك ليس فقط الساعات التي تعيشها، بل ما تضعه في هذه الساعات من عمل نافع.",question:"🎯 هل تريد أن تستعيد جزءًا من عمرك الآن؟"},
-{title:"☀️ لحظة أمل",badge:"سورة الضحى",text:"﴿وَالضُّحَى ۝ وَاللَّيْلِ إِذَا سَجَى ۝ مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَى﴾",source:"سورة الضحى",idea:"قد تمر بك لحظات ثقيلة، لكن الأمل قد يبدأ بلحظة صادقة.",question:"🎯 خذ لحظتك الآن واجعلها بداية لشيء نافع."},
-{title:"🌱 لحظة تفاؤل",badge:"سورة الشرح",text:"﴿فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾",source:"سورة الشرح",idea:"لا تجعل صعوبة اليوم سببًا لإضاعة كل يومك. ابدأ بخطوة صغيرة.",question:"🎯 هل تستطيع أن تمنح نفسك لحظة هادئة الآن؟"},
-{title:"⏳ لحظة مع الوقت",badge:"سورة التكاثر",text:"﴿أَلْهَاكُمُ التَّكَاثُرُ ۝ حَتَّىٰ زُرْتُمُ الْمَقَابِرَ﴾",source:"سورة التكاثر",idea:"كثرة الانشغال قد تجعل الإنسان ينسى قيمة الوقت الذي بين يديه.",question:"🎯 توقف قليلًا واسأل نفسك: أين يذهب وقتي؟"},
-{title:"🌌 لحظة تفكر",badge:"سورة الملك",text:"﴿الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا﴾",source:"سورة الملك",idea:"قيمة الوقت ليست في كثرته فقط، بل في جودة ما نفعله خلاله.",question:"🎯 اختر عملًا واحدًا نافعًا وامنحه وقتك الآن."}
-];
-
-const challenges=[
-{title:"📵 تحدي 10 دقائق بدون هاتف",description:"ضع الهاتف جانبًا لمدة 10 دقائق. لا تفتح أي تطبيق واستعمل الوقت في الهدوء أو التفكير.",seconds:600,points:10},
-{title:"📖 تحدي 15 دقيقة قراءة",description:"اختر كتابًا أو مادة نافعة واقرأ بهدوء لمدة 15 دقيقة.",seconds:900,points:15},
-{title:"🧠 تحدي 10 دقائق تفكر",description:"ابتعد عن الهاتف وخذ 10 دقائق للتفكير في يومك وما الشيء الذي تريد تحسينه.",seconds:600,points:10},
-{title:"💪 تحدي 20 دقيقة عمل نافع",description:"اختر مهمة مهمة بالنسبة لك وركز عليها 20 دقيقة دون تشتت.",seconds:1200,points:20},
-{title:"🌿 تحدي 15 دقيقة هدوء",description:"اترك الهاتف جانبًا واجلس في مكان هادئ لمدة 15 دقيقة.",seconds:900,points:15}
-];
-
-function getPoints(){const v=Number(localStorage.getItem("lahthaPoints"));return Number.isFinite(v)&&v>=0?v:0}
-function savePoints(v){localStorage.setItem("lahthaPoints",String(v));updatePointsDisplay()}
-function addPoints(v){savePoints(getPoints()+v)}
-function updatePointsDisplay(){
- const p=getPoints();
- const a=document.getElementById("pointsStart"),b=document.getElementById("pointsScreen6"),c=document.getElementById("totalPoints"),d=document.getElementById("pointsEarly");
- if(a)a.textContent="⭐ نقاطك: "+p;if(b)b.textContent=p;if(c)c.textContent=p;if(d)d.textContent=p;
-}
-function goTo(n){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));const t=document.getElementById("screen"+n);if(t)t.classList.add("active");updatePointsDisplay();scrollTo(0,0)}
-function chooseActivity(v){activity=v;document.getElementById("activityTitle").textContent=v==="أدرس"?"ممتاز 📚":v==="أعمل"?"ممتاز 🧑‍💼":v==="أعمل وأدرس"?"ممتاز 📚💼":"تمام 🏠";goTo(3)}
-function saveEndTime(){
- const i=document.getElementById("endTime");if(!i.value){alert("اختر وقت الانتهاء أولًا.");return}
- endTime=i.value;localStorage.setItem("lahthaActivity",activity);localStorage.setItem("lahthaEndTime",endTime);
- document.getElementById("summaryTime").textContent=activity+" — ينتهي الوقت: "+endTime;goTo(4)
-}
-function chooseLimit(h){limitHours=h;document.getElementById("customArea").innerHTML="";saveSettings();goTo(5)}
-function chooseCustom(){document.getElementById("customArea").innerHTML='<input type="number" id="customHours" min="1" max="12" placeholder="عدد الساعات"><button onclick="saveCustomLimit()">تأكيد المدة</button>'}
-function saveCustomLimit(){const v=Number(document.getElementById("customHours").value);if(!Number.isInteger(v)||v<1||v>12){alert("أدخل عدد ساعات صحيحًا بين 1 و12.");return}chooseLimit(v)}
-function getTargetTime(){
- if(!endTime)return null;const p=endTime.split(":"),now=new Date(),t=new Date(now.getFullYear(),now.getMonth(),now.getDate(),Number(p[0]),Number(p[1]),0,0);t.setTime(t.getTime()+limitHours*3600000);return t
-}<script>
 
 let activity = "";
 let endTime = "";
@@ -586,7 +577,7 @@ let notificationSent = false;
 
 
 /* =========================
-   المحتوى الروحي
+المحتوى الروحي
 ========================= */
 
 const spiritualContents = [
@@ -640,7 +631,7 @@ question:"🎯 اختر عملًا واحدًا نافعًا وامنحه وقت
 
 
 /* =========================
-   التحديات
+التحديات
 ========================= */
 
 const challenges = [
@@ -684,12 +675,13 @@ points:15
 
 
 /* =========================
-   النقاط
+النقاط
 ========================= */
 
 function getPoints(){
 
-const value = Number(
+const value =
+Number(
 localStorage.getItem("lahthaPoints")
 );
 
@@ -754,7 +746,7 @@ early.textContent = points;
 
 
 /* =========================
-   التنقل بين الصفحات
+التنقل
 ========================= */
 
 function goTo(number){
@@ -768,7 +760,9 @@ screen.classList.remove("active");
 });
 
 const target =
-document.getElementById("screen" + number);
+document.getElementById(
+"screen" + number
+);
 
 if(target){
 
@@ -784,7 +778,7 @@ window.scrollTo(0,0);
 
 
 /* =========================
-   اختيار النشاط
+اختيار النشاط
 ========================= */
 
 function chooseActivity(value){
@@ -792,16 +786,20 @@ function chooseActivity(value){
 activity = value;
 
 const title =
-document.getElementById("activityTitle");
+document.getElementById(
+"activityTitle"
+);
 
 if(value === "أدرس"){
 
-title.textContent = "ممتاز 📚";
+title.textContent =
+"ممتاز 📚";
 
 }
 else if(value === "أعمل"){
 
-title.textContent = "ممتاز 🧑‍💼";
+title.textContent =
+"ممتاز 🧑‍💼";
 
 }
 else if(value === "أعمل وأدرس"){
@@ -812,7 +810,8 @@ title.textContent =
 }
 else{
 
-title.textContent = "تمام 🏠";
+title.textContent =
+"تمام 🏠";
 
 }
 
@@ -822,13 +821,15 @@ goTo(3);
 
 
 /* =========================
-   حفظ وقت الانتهاء
+وقت الانتهاء
 ========================= */
 
 function saveEndTime(){
 
 const input =
-document.getElementById("endTime");
+document.getElementById(
+"endTime"
+);
 
 if(!input.value){
 
@@ -865,7 +866,7 @@ goTo(4);
 
 
 /* =========================
-   اختيار عدد الساعات
+الساعات
 ========================= */
 
 function chooseLimit(hours){
@@ -926,7 +927,7 @@ chooseLimit(value);
 
 
 /* =========================
-   حفظ الإعدادات
+حفظ الإعدادات
 ========================= */
 
 function saveSettings(){
@@ -961,7 +962,7 @@ startPersonalTimer();
 
 
 /* =========================
-   حساب وقت التنبيه
+وقت التنبيه
 ========================= */
 
 function getTargetTime(){
@@ -1003,7 +1004,7 @@ return target;
 
 
 /* =========================
-   تشغيل عداد الوقت الشخصي
+العداد الشخصي
 ========================= */
 
 function startPersonalTimer(){
@@ -1025,10 +1026,6 @@ updatePersonalTimer,
 
 }
 
-
-/* =========================
-   انتهاء الوقت
-========================= */
 
 function timeFinished(){
 
@@ -1077,10 +1074,6 @@ personalTimerInterval
 
 }
 
-
-/* =========================
-   عداد الوقت الشخصي
-========================= */
 
 function updatePersonalTimer(){
 
@@ -1144,7 +1137,7 @@ String(secs).padStart(2,"0");
 
 
 /* =========================
-   الإشعارات
+الإشعارات
 ========================= */
 
 function requestNotificationPermission(){
@@ -1212,12 +1205,10 @@ body:
 
 
 /* =========================
-   اختيار المسار
+المسارات
 ========================= */
 
 function choosePath(path){
-
-/* آخرتي */
 
 if(path === "آخرتي"){
 
@@ -1237,9 +1228,6 @@ return;
 
 }
 
-
-/* دنياي */
-
 if(path === "دنياي"){
 
 goTo(11);
@@ -1251,10 +1239,6 @@ return;
 }
 
 
-/* =========================
-   سأكمل
-========================= */
-
 function continuePhone(){
 
 goTo(12);
@@ -1263,7 +1247,7 @@ goTo(12);
 
 
 /* =========================
-   عرض المحتوى الروحي
+عرض المحتوى الروحي
 ========================= */
 
 function displayCurrentContent(){
@@ -1298,7 +1282,8 @@ currentContent.source;
 document.getElementById(
 "contentIdea"
 ).textContent =
-"💡 " + currentContent.idea;
+"💡 " +
+currentContent.idea;
 
 document.getElementById(
 "challengeQuestion"
@@ -1309,7 +1294,7 @@ currentContent.question;
 
 
 /* =========================
-   التحدي الروحي
+التحديات
 ========================= */
 
 function startChallenge(){
@@ -1329,10 +1314,6 @@ challenge
 }
 
 
-/* =========================
-   التحدي الدنيوي
-========================= */
-
 function startWorldChallenge(){
 
 const challenge =
@@ -1349,10 +1330,6 @@ challenge
 
 }
 
-
-/* =========================
-   تشغيل التحدي
-========================= */
 
 function startSelectedChallenge(
 challenge
@@ -1384,7 +1361,8 @@ challenge.description;
 document.getElementById(
 "challengePoints"
 ).textContent =
-"+" + challenge.points;
+"+" +
+challenge.points;
 
 updateTimer();
 
@@ -1422,7 +1400,7 @@ updateTimer();
 
 
 /* =========================
-   عداد التحدي
+عداد التحدي
 ========================= */
 
 function updateTimer(){
@@ -1454,7 +1432,7 @@ String(seconds).padStart(2,"0");
 
 
 /* =========================
-   إكمال التحدي
+إكمال التحدي
 ========================= */
 
 function completeChallenge(){
@@ -1491,7 +1469,7 @@ goTo(9);
 
 
 /* =========================
-   إنهاء التحدي مبكرًا
+إنهاء التحدي
 ========================= */
 
 function finishEarly(){
@@ -1520,7 +1498,7 @@ goTo(10);
 
 
 /* =========================
-   العودة للبداية
+إعادة البداية
 ========================= */
 
 function restartDay(){
@@ -1557,7 +1535,7 @@ goTo(1);
 
 
 /* =========================
-   تحميل البيانات المحفوظة
+تحميل البيانات
 ========================= */
 
 function loadSavedData(){
@@ -1631,7 +1609,7 @@ startPersonalTimer();
 
 
 /* =========================
-   تشغيل التطبيق
+تشغيل التطبيق
 ========================= */
 
 document.addEventListener(
@@ -1646,3 +1624,6 @@ updatePointsDisplay();
 );
 
 </script>
+
+</body>
+</html>
